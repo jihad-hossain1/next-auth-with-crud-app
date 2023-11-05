@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .inpt {
+        @apply p-4 focus:outline-none rounded text-gray-900;
+    }
+
+    .btn {
+        @apply hover:no-underline bg-blue-accent tracking-wider w-full text-center text-nav font-bold cursor-pointer uppercase px-4 py-2 rounded-md hover:bg-blue-accent-hover transition-colors block;
+    }
+}
