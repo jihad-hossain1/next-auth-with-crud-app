@@ -1,7 +1,35 @@
-import React from "react";
+import TicketForm from "@/app/(components)/TicketForm";
 
-const SingleTicketPage = ({ params }) => {
-  return <div>SingleTicketPage</div>;
+const getTicketById = async (id) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_BASE_URI}/api/Tickets/${id}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch topic");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export default SingleTicketPage;
+let updateTicketData = {};
+
+const TicketFormPage = async ({ params }) => {
+  const EDITMODE = params.id === "new" ? false : true;
+
+  if (EDITMODE) {
+    updateTicketData = await getTicketById(params.id);
+    updateTicketData = updateTicketData.foundTicket;
+  } else {
+    updateTicketData = {
+      _id: "new",
+    };
+  }
+  return <TicketForm ticket={updateTicketData} />;
+};
+
+export default TicketFormPage;

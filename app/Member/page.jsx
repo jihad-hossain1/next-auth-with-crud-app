@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import TicketForm from "../(components)/TicketForm";
 
 const Member = async () => {
   const session = await getServerSession(options);
@@ -15,10 +14,6 @@ const Member = async () => {
       <h1>Member Server Session</h1>
       <p>{session?.user?.email}</p>
       <p>{session?.user?.role}</p>
-
-      <div className="max-w-screen-xl mx-auto min-h-full">
-        <TicketForm />
-      </div>
     </div>
   );
 };
